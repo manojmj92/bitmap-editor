@@ -43,6 +43,13 @@ describe Image do
       end
     end
 
+    describe "#fill" do
+      it "fills an entire area" do
+        @image.fill(2,2,"B")
+        expect(@image.to_s).to eq("BBBBB\nBBBBB\nBBBBB\nBBBBB")
+      end
+    end
+
 
   end
 end

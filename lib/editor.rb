@@ -15,6 +15,8 @@ class Editor
       create_image($1.to_i, $2.to_i)
     when /L (\d+) (\d+) (.+)/
       paint($1.to_i, $2.to_i, $3)
+    when /F (\d+) (\d+) (.+)/
+      fill($1.to_i, $2.to_i, $3)
     when /V (\d+) (\d+) (\d+) (.+)/
       vertical_segment($1.to_i, $2.to_i, $3.to_i, $4)
     when /H (\d+) (\d+) (\d+) (.+)/
@@ -48,6 +50,10 @@ class Editor
 
   def paint(x, y, c)
     check_image && @image.paint(x, y, c)
+  end
+
+  def fill(x, y, c)
+    check_image && @image.fill(x, y, c)
   end
 
   def vertical_segment(x, y1, y2, c)
