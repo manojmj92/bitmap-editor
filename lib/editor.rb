@@ -13,10 +13,14 @@ class Editor
     case buffer
     when /I (\d+) (\d+)/
       create_image($1.to_i, $2.to_i)
+    when /L (\d+) (\d+) (.+)/
+      paint($1.to_i, $2.to_i, $3)
     when "X"
       quit
     when "S"
       show_image
+    when "C"
+      clear_image
     else
       puts "Unknown command"
     end
@@ -32,6 +36,18 @@ class Editor
     else
       puts "Please create an image first"
     end
+  end
+
+  def clear_image
+    if @image
+      @image.clear
+    else
+      puts "Please create an image first"
+    end
+  end
+
+  def paint(x, y, c)
+    @image.paint(x, y, c)
   end
 
   def quit
