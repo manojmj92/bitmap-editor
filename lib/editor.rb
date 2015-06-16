@@ -15,6 +15,8 @@ class Editor
       create_image($1.to_i, $2.to_i)
     when /L (\d+) (\d+) (.+)/
       paint($1.to_i, $2.to_i, $3)
+    when /V (\d+) (\d+) (\d+) (.+)/
+      vertical_segment($1.to_i, $2.to_i, $3.to_i, $4)
     when "X"
       quit
     when "S"
@@ -31,27 +33,36 @@ class Editor
   end
 
   def show_image
-    if @image
-      @image.print
-    else
-      puts "Please create an image first"
-    end
+    check_image && @image.print
   end
 
   def clear_image
-    if @image
-      @image.clear
-    else
-      puts "Please create an image first"
-    end
+    check_image && @image.clear
+  end
+
+  def vertical_segment
+    check_image && @image.clear
   end
 
   def paint(x, y, c)
-    @image.paint(x, y, c)
+    check_image && @image.paint(x, y, c)
+  end
+
+  def vertical_segment(x, y1, y2, c)
+    check_image && @image.vertical_segment(x, y1, y2, c)
   end
 
   def quit
     puts "Bye bye"
     exit
+  end
+
+  def check_image
+    if @image
+      true
+    else
+      puts "Please create an image first"
+      false
+    end
   end
 end

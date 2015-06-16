@@ -19,6 +19,11 @@ class Image
     @rows[y - 1][x - 1] = c
   end
 
+  def vertical_segment(x, y1, y2, c)
+    return unless x.between?(0, @width)
+    ((y1-1)..(y2-1)).each{|y| @rows[y][x-1] = c if y.between?(0, @height)}
+  end
+
   def to_s
     @rows.map(&:join).join("\n")
   end
