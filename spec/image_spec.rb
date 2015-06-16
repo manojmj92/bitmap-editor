@@ -36,6 +36,13 @@ describe Image do
       end
     end
 
+    describe "#horizontal_segment" do
+      it "colours a horizontal segment" do
+        @image.horizontal_segment(2, 4, 2, "W")
+        expect(@image.to_s).to eq("00000\n0WWW0\n00000\n00000")
+      end
+    end
+
 
   end
 end

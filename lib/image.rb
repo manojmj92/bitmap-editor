@@ -24,6 +24,11 @@ class Image
     ((y1-1)..(y2-1)).each{|y| @rows[y][x-1] = c if y.between?(0, @height)}
   end
 
+  def horizontal_segment(x1, x2, y, c)
+    return unless y.between?(0, @height)
+    ((x1-1)..(x2-1)).each{|x| @rows[y-1][x] = c if x.between?(0, @width)}
+  end
+
   def to_s
     @rows.map(&:join).join("\n")
   end

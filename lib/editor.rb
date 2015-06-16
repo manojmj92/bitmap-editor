@@ -17,6 +17,8 @@ class Editor
       paint($1.to_i, $2.to_i, $3)
     when /V (\d+) (\d+) (\d+) (.+)/
       vertical_segment($1.to_i, $2.to_i, $3.to_i, $4)
+    when /H (\d+) (\d+) (\d+) (.+)/
+      horizontal_segment($1.to_i, $2.to_i, $3.to_i, $4)
     when "X"
       quit
     when "S"
@@ -50,6 +52,10 @@ class Editor
 
   def vertical_segment(x, y1, y2, c)
     check_image && @image.vertical_segment(x, y1, y2, c)
+  end
+
+  def horizontal_segment(y, x1, x2, c)
+    check_image && @image.horizontal_segment(x1, x2, y, c)
   end
 
   def quit
