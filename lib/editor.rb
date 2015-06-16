@@ -60,7 +60,7 @@ class Editor
     check_image && @image.vertical_segment(x, y1, y2, c)
   end
 
-  def horizontal_segment(y, x1, x2, c)
+  def horizontal_segment(x1, x2, y, c)
     check_image && @image.horizontal_segment(x1, x2, y, c)
   end
 
