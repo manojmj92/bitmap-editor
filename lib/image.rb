@@ -1,4 +1,16 @@
+require 'colorize'
+
 class Image
+  COLORS = {
+    'B' => :blue,
+    'C' => :cyan,
+    'M' => :magenta,
+    'O' => :grey,
+    'R' => :red,
+    'W' => :white,
+    'Y' => :yellow
+  }
+
   def initialize(width, height)
     @width = width
     @height = height
@@ -9,8 +21,19 @@ class Image
     @width.between?(1,250) && @height.between?(1,250)
   end
 
+  def colorize(char)
+    if colour = COLORS[char]
+      char.to_s.colorize(colour)
+    else
+      char
+    end
+  end
+
   def print
-    puts(to_s)
+    to_s.each_char do |c|
+      Kernel.print(colorize(c))
+    end
+    puts
   end
 
   def clear
