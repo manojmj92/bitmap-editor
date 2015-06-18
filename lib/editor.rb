@@ -2,6 +2,8 @@ require 'pry'
 require 'readline'
 
 class Editor
+  attr_accessor :image
+
   def run
     puts "Starting Bitmap editor"
     while buffer = Readline.readline("> ", true) do
