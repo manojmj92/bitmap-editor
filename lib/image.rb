@@ -33,15 +33,16 @@ class Image
     (x1..x2).each{|x| @columns[x-1][y-1] = c if x.between?(1, @width)}
   end
 
-  def fill(x, y, c)
-    fill_absolute_position(x-1, y-1, c)
+  def fill(x, y, replacement)
+    target = @columns[x-1][y-1]
+    fill_absolute_position(x-1, y-1, target, replacement)
   end
 
   # Recursively fills the neighbours with the same colour
-  def fill_absolute_position(x, y, c, recursive_depth = 0)
-    recursive_depth += 1
-    current = @columns[x][y]
-    @columns[x][y] = c
+  def fill_absolute_position(x, y, target, replacement)
+    return if @columns[x][y] == replacement
+    return if @columns[x][y] != target
+    @columns[x][y] = replacement
 
     neighbours = [
       [x+1, y],   # right
@@ -49,16 +50,14 @@ class Image
       [x, y+1],   # up
       [x, y-1]    # down
     ].select do |point|
-      px = point[0]
-      py = point[1]
-      px.between?(0, @width - 1) && py.between?(0, @height - 1) && @columns[px][py] == current
+      valid_point?(point)
+    end.each do |point|
+      fill_absolute_position(point[0], point[1], target, replacement)
     end
+  end
 
-    neighbours.each do |point|
-      px = point[0]
-      py = point[1]
-      fill_absolute_position(px, py, c, recursive_depth) if recursive_depth < 10
-    end
+  def valid_point?(point)
+    point[0].between?(0, @width - 1) && point[1].between?(0, @height - 1)
   end
 
 
