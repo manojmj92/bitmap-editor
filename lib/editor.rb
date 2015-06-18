@@ -34,6 +34,10 @@ class Editor
 
   def create_image(width, height)
     @image = Image.new(width, height)
+    unless @image.valid?
+      puts "Bad image size"
+      @image = nil
+    end
   end
 
   def show_image

@@ -5,6 +5,10 @@ class Image
     clear
   end
 
+  def valid?
+    @width.between?(1,250) && @height.between?(1,250)
+  end
+
   def print
     puts(to_s)
   end
