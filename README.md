@@ -2,4 +2,10 @@ This is a nicer solution. Being an exercise I didn't bother adding comments - so
 
 Some characters (B,C,G,M,O,R,W,Y) are shown using terminal colours.
 
+Usage:
+```
+bundle exec ruby bitmap-editor.rb
+```
+
 Cheers
+
