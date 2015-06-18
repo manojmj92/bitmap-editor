@@ -4,6 +4,7 @@ class Image
   COLORS = {
     'B' => :blue,
     'C' => :cyan,
+    'G' => :green,
     'M' => :magenta,
     'O' => :grey,
     'R' => :red,
@@ -23,7 +24,7 @@ class Image
 
   def colorize(char)
     if colour = COLORS[char]
-      char.to_s.colorize(colour)
+      char.colorize(colour)
     else
       char
     end
